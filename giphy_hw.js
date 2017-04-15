@@ -23,10 +23,30 @@ console.log(options);
 
 $(".newButton").on("click", function(){
 var topic = $(this).val();
-console.log(topic);
+// console.log(topic);
+
+// alert("You clicked " + topic);
+var NewqueryUrl = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&limit=" + limit + "&api_key=" + authKey;
+
+ $.ajax({ url: NewqueryUrl, method: 'GET' })
+        .done(function(responseii) {
+
+console.log(responseii);
+
+var img1_New = responseii.data[0].images.original.url;
+            var img2_New = responseii.data[1].images.original.url;
+            var img3_New = responseii.data[2].images.original.url;
+            var img4_New = responseii.data[3].images.original.url;
+            var img5_New = responseii.data[4].images.original.url;
+$("#GIFSfound").html("<img src=" + img1_New + "> </br> <img src= " + img2_New + "> </br> <img src= " + img3_New + "> </br> <img src= " + img4_New + "> </br> <img src= " + img5_New + ">");
+
+
+
+});
 
 });
 });
+
 
 for (i = 0; i < options.length; i++) {
     button = $("<button class='Button' value= " + options[i] + " ></button>").attr('id', options[i]).text(options[i]);
